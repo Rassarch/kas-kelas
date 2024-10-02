@@ -48,11 +48,11 @@
                             <input type="text" class="form-control" name="judul_kas" value="<?= $kas['judul_kas'] ?>">
                             
                             <label>Jenis Kas</label>
-                            <select class="form-select" aria-label="Default select example" name="jenis_kas">
-                                <option selected>Pilih Jenis Kas</option>
-                                <option value="Masuk">Kas Masuk</option>
-                                <option value="Keluar">Kas Keluar</option>
+                            <select class="form-select" aria-label="Pilih jenis kas" name="jenis_kas">
+                                <option value="Masuk" <?= ($kas['jenis_kas'] == 'Masuk') ? 'selected' : '' ?>>Kas Masuk</option>
+                                <option value="Keluar" <?= ($kas['jenis_kas'] == 'Keluar') ? 'selected' : '' ?>>Kas Keluar</option>
                             </select>
+
     
                             <label>Nominal</label>
                             <div class="input-group">
