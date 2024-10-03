@@ -22,8 +22,9 @@
         <p class="text-center">KELAS XI RPL B SMKN 3 METRO T.A 2024</p>
         <div class="card">
             <div class="card-body">
+            <a href="input-kas.php" class="btn btn-success mb-3">Input Lagi</a>
                 <table class="table">
-                    <thead class="table-warning">
+                    <thead class="table-success">
                         <tr>
                             <th>Id</th>
                             <th>Judul</th>
@@ -47,7 +48,7 @@
                             <td><?= $kas['keterangan'] ?></td>
                             <td>
                                 <a href="edit-kas.php?id=<?= $kas['id'] ?>" class="btn btn-sm btn-warning">Edit</a>
-                                <a href="daftar-kas.php?id=<?php $kas['id'] ?>" class="btn btn-sm btn-danger">Hapus</a>
+                                <a href="hapus-kas.php?id=<?= $kas['id'] ?>" class="btn btn-sm btn-danger">Hapus</a>
                             </td>
                         </tr>
                         <?php
@@ -59,9 +60,26 @@
                         </tr>
                         <?php endif ?>
                     </tbody>
-
                 </table>
-                <a href="input-kas.php" class="btn btn-success mb-3">Input Lagi</a>
+
+                <?php
+                    $kasMasuk = mysqli_query($koneksi, "SELECT SUM(nominal) AS kasMasuk FROM kas WHERE jenis_kas='masuk'"); 
+                    $totalKasMasuk = mysqli_fetch_column($kasMasuk);
+
+                    $kasKeluar = mysqli_query($koneksi, "SELECT SUM(nominal) AS kasKeluar FROM kas WHERE jenis_kas='masuk'"); 
+                    $totalKasKeluar = mysqli_fetch_column($kasKeluar);
+                    
+                    $totalKasFlow = $totalKasMasuk - $totalKasKeluar;
+                ?>
+
+                <div>
+                    <ul>
+                        <li>Total Kas Masuk : <?= $totalKasMasuk ?></li>
+                        <li>Total Kas Keluar : <?= $totalKasKeluar ?> </li>
+                        <li>Total Net Flow : <?= $totalKasFlow ?></li>
+                    </ul>
+                </div>
+
             </div>
         </div>
 
