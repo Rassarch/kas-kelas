@@ -47,9 +47,15 @@
                 </ul>
                 <form class="d-flex gap-2 align-items-center" action="logout.php" method="$_POST">
                     <div>
-                        Hallo, <?= $_SESSION['user']['nama_lengkap'] ?>
+                        <?php
+                            if (isset($_SESSION['user'])) {
+                                echo "Hallo," .$_SESSION['user']['nama_lengkap'].'<button class="btn btn-danger">Logout</button>';
+                            }else {
+                                echo "";
+                            }
+                        ?>
+                    
                     </div>
-                    <button class="btn btn-danger">Logout</button>
                 </form>
             </div>
         </div>
@@ -61,7 +67,14 @@
         <div class="card">
             <div class="card-body">
                 <table class="table">
-                <a href="input-kas.php" class="btn btn-success mb-3">Input Lagi</a> 
+                
+                <?php
+                            if (isset($_SESSION['user'])) {
+                                echo "";
+                            }else {
+                                echo "";
+                            }
+                        ?>
 
                     <thead class="table-warning">
                         <tr>
