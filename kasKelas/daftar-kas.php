@@ -12,11 +12,48 @@
 
 
     <?php
+        session_start();
         include "koneksi.php";
         $sql = "SELECT * FROM kas ORDER BY tanggal DESC";
         $query = mysqli_query($koneksi, $sql);
         $list_kas = mysqli_fetch_all($query, MYSQLI_ASSOC);
     ?>
+
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Aplikasi Kas</a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Link</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Dropdown
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+                    </li>
+                </ul>
+                <form class="d-flex gap-2 align-items-center" action="logout.php" method="$_POST">
+                    <div>
+                        Hallo, <?= $_SESSION['user']['nama_lengkap'] ?>
+                    </div>
+                    <button class="btn btn-danger">Logout</button>
+                </form>
+            </div>
+        </div>
+    </nav>
 
     <div class="container">
         <h2 class="text-center mt-5">DAFTAR KAS MASUK DAN KELUAR</h2>
@@ -24,7 +61,8 @@
         <div class="card">
             <div class="card-body">
                 <table class="table">
-                <a href="input-kas.php" class="btn btn-success mb-3">Input Lagi</a>
+                <a href="input-kas.php" class="btn btn-success mb-3">Input Lagi</a> 
+
                     <thead class="table-warning">
                         <tr>
                             <th>Id</th>
