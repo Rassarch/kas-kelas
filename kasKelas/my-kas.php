@@ -23,36 +23,16 @@
 </head>
 <body>
     <?php
-    session_start();
-    include "koneksi.php";
-    $id = $_SESSION['user']['id'];
-    $sql = "SELECT kas.*, pengguna.nama_lengkap FROM kas INNER JOIN pengguna ON pengguna.id = kas.pengguna_id ORDER BY kas.tanggal DESC";
-    $query = mysqli_query($koneksi, $sql);
-    $list_kas = mysqli_fetch_all($query, MYSQLI_ASSOC);
+        session_start();
+        include "koneksi.php";
+        $pengguna_id = $_SESSION['user']['id'];
+        $sql = "SELECT * FROM kas WHERE pengguna_id = $pengguna_id ORDER BY tanggal DESC";
+        $query = mysqli_query($koneksi, $sql);
+        $list_kas = mysqli_fetch_all($query, MYSQLI_ASSOC);
     ?>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">Aplikasi Kas</a>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Dropdown</a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-                    </li>
                 </ul>
                 <form class="d-flex gap-2 align-items-center" action="logout.php" method="POST">
                     <div>
@@ -68,17 +48,17 @@
         </div>
     </nav>
     <div class="container">
-        <h2 class="text-center mt-5">DAFTAR KAS MASUK DAN KELUAR</h2>
+        <h2 class="text-center mt-5">DAFTAR KAS SAYA</h2>
         <p class="text-center">KELAS XI RPL B SMKN 3 METRO T.A 2024</p>
         <div class="card">
             <div class="card-body">
                 <a href="input-kas.php" class="btn btn-success mb-3">Input Kas</a>
                 <a href="my-kas.php" class="btn btn-primary mb-3">Kas Saya</a>
+                <a href="daftar-kas.php" class="btn btn-info mb-3">Lihat Daftar Kas</a>
                 <table class="table table-bordered table-striped">
                     <thead class="table-warning">
                         <tr>
                             <th>No</th>
-                            <th>Pengguna</th>
                             <th>Judul</th>
                             <th>Jenis</th>
                             <th>Nominal</th>
@@ -93,7 +73,6 @@
                         <?php foreach ($list_kas as $no => $kas) : ?>
                             <tr>
                                 <td><?= $no + 1 ?></td>
-                                <td><?= $kas['nama_lengkap'] ?></td>
                                 <td><?= $kas['judul_kas'] ?></td>
                                 <td><?= $kas['jenis_kas'] ?></td>
                                 <td><?= $kas['nominal'] ?></td>
@@ -124,14 +103,14 @@
         $totalNetFlow = $totalKasMasuk - $totalKasKeluar;
         ?>
         <div>
-            <ul>
-                <li>Total Kas Masuk: <?= $totalKasMasuk ?></li>
-                <li>Total Kas Keluar: <?= $totalKasKeluar ?></li>
-                <li>Total Net Flow: <?= $totalNetFlow ?></li>
+            <ul class="list-inline">
+                <li class="list-inline-item">Total Kas Masuk: <?= $totalKasMasuk ?></li>
+                <li class="list-inline-item">Total Kas Keluar: <?= $totalKasKeluar ?></li>
+                <li class="list-inline-item">Total Net Flow: <?= $totalNetFlow ?></li>
             </ul>
         </div>
         <div class="container mt-5">
-            <h3 class="text-center">Visualisasi Data Kas Kelas</h3>
+            <h3 class="text-center">Visualisasi Data Kas Saya</h3>
             <p class="text-center">KELAS XI RPL B SMKN 3 METRO T.A 2024</p>
             <canvas id="kasChart"></canvas>
         </div>

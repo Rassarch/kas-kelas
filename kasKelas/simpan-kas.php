@@ -1,5 +1,5 @@
 <?php
-    
+session_start();
 
 
 // Memasukkkan koneksi kedalam sini
@@ -10,9 +10,14 @@ $jenis_kas = $_POST ['jenis_kas'];
 $nominal = $_POST ['nominal'];
 $tanggal = $_POST ['tanggal'];
 $keterangan = $_POST ['keterangan'];
+$pengguna_id = $_SESSION ['user']['id'];
 
-$sql = "INSERT INTO kas(judul_kas, jenis_kas, nominal, tanggal, keterangan)
-        VALUES ('$judul_kas', '$jenis_kas', '$nominal', '$tanggal', '$keterangan')";
+if (empty($pengguna_id)) {
+    die('Login dulu le..');
+}
+
+$sql = "INSERT INTO kas(judul_kas, jenis_kas, nominal, tanggal, keterangan, pengguna_id)
+        VALUES ('$judul_kas', '$jenis_kas', '$nominal', '$tanggal', '$keterangan', '$pengguna_id')";
 
 $simpan = mysqli_query($koneksi, $sql);
 

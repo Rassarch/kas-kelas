@@ -52,12 +52,11 @@
                                 <option value="Masuk" <?= ($kas['jenis_kas'] == 'Masuk') ? 'selected' : '' ?>>Kas Masuk</option>
                                 <option value="Keluar" <?= ($kas['jenis_kas'] == 'Keluar') ? 'selected' : '' ?>>Kas Keluar</option>
                             </select>
-
-    
+                                                        
                             <label>Nominal</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text">Rp</span>
+                                    <span class="input-group-text" id="basic-addon1">Rp</span>
                                 </div>
                                 <input type="number" class="form-control" name="nominal" value="<?= $kas['nominal'] ?>">
                             </div>

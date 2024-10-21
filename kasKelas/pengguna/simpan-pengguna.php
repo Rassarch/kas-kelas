@@ -29,7 +29,7 @@
                         $alamat = $_POST['alamat'];
                         $no_hp = $_POST['no_hp'];
                         $tanggal_lahir = $_POST['tanggal_lahir'];
-                        $password_pengguna = $_POST['password_pengguna'];
+                        $password_pengguna = password_hash($_POST['password_pengguna'], PASSWORD_DEFAULT);
 
                         // Validasi input
                         $errors = [];

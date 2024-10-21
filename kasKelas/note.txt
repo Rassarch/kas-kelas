@@ -26,7 +26,7 @@
     session_start();
     include "koneksi.php";
     $id = $_SESSION['user']['id'];
-    $sql = "SELECT kas.*, pengguna.nama_lengkap FROM kas INNER JOIN pengguna ON pengguna.id = kas.pengguna_id ORDER BY kas.tanggal DESC";
+    $sql = "SELECT * FROM kas WHERE id = $id ORDER BY tanggal DESC";
     $query = mysqli_query($koneksi, $sql);
     $list_kas = mysqli_fetch_all($query, MYSQLI_ASSOC);
     ?>
@@ -173,3 +173,15 @@
     </script>
 </body>
 </html>
+
+
+$sql = "SELECT kas.*, pengguna.nama_lengkap FROM kas INNER JOIN pengguna ON pengguna.id = kas.pengguna_id ORDER BY kas.tanggal DESC";
+
+<?php
+session_start();
+include "koneksi.php";
+$pengguna_id = $_SESSION['user']['id'];
+$sql = "SELECT * FROM kas WHERE pengguna_id = $pengguna_id ORDER BY tanggal DESC";
+$query = mysqli_query($koneksi, $sql);
+$list_kas = mysqli_fetch_all($query, MYSQLI_ASSOC);
+?>
